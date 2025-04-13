@@ -4,10 +4,23 @@ const {
   Partials,
   Collection,
 } = require('discord.js');
+const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
-const config = require('./config');
+// Express server configuration
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Health check route
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
+// Start Express server
+app.listen(port, () => {
+  console.log(`Health check server running on port ${port}`);
+});
 
 // Discord client configuration
 const client = new Client({
@@ -59,4 +72,4 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 // Bot login
-client.login(config.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN);
