@@ -9,6 +9,12 @@ const fs = require('fs');
 const path = require('path');
 
 const config = require('./config');
+const { job } = require('./cron');
+
+// This will keep the backend alive always. I need this because
+// the backend is hosted on Render.com and it goes
+// to sleep by inactivity.
+job.start();
 
 // Express server configuration
 const app = express();
