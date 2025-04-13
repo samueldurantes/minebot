@@ -8,6 +8,8 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
+const config = require('./config');
+
 // Express server configuration
 const app = express();
 const port = process.env.PORT || 3000;
@@ -72,4 +74,4 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 // Bot login
-client.login(process.env.DISCORD_TOKEN);
+client.login(config.DISCORD_TOKEN);
