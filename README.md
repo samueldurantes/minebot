@@ -1,4 +1,4 @@
-# Minecraft Server Discord Bot
+# minebot
 
 A Discord bot that controls a Minecraft server hosted on AWS EC2.
 
@@ -11,28 +11,16 @@ A Discord bot that controls a Minecraft server hosted on AWS EC2.
 
 ## Setup
 
-1. Install dependencies:
-
-```bash
-pnpm install
-```
-
-2. Create a `.env` file with:
+1. Create a `.env` file with:
 
 ```bash
 cp .env.example .env
 ```
 
-3. Edit the `.env` file with your Discord token and AWS credentials:
+2. Edit the `.env` file with your credentials.
 
-4. Start the bot:
-
-```bash
-pnpm start
-```
-
-5. Run bot in development mode:
+3. Start the bot:
 
 ```bash
-pnpm dev
+cargo run
 ```
