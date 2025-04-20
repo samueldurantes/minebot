@@ -1,0 +1,12 @@
+[package]
+name = "minebot"
+version = "0.0.1"
+edition = "2024"
+
+[dependencies]
+aws-sdk-ec2 = "1.121.1"
+aws-config = "1.1.7"
+dotenvy = "0.15.7"
+serenity = { version = "0.12.4", features = ["client", "gateway", "rustls_backend", "model", "collector"] }
+tokio = { version = "1.44.2", features = ["macros", "rt-multi-thread"] }
+async-minecraft-ping = "0.8.0"

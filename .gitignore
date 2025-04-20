@@ -38,3 +38,8 @@ tmp
 .backup
 .env
 node_modules
+
+
+# Added by cargo
+
+/target
