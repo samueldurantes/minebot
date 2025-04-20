@@ -10,3 +10,4 @@ dotenvy = "0.15.7"
 serenity = { version = "0.12.4", features = ["client", "gateway", "rustls_backend", "model", "collector"] }
 tokio = { version = "1.44.2", features = ["macros", "rt-multi-thread"] }
 async-minecraft-ping = "0.8.0"
+axum = "0.8.3"

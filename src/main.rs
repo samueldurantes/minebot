@@ -1,6 +1,7 @@
 use minebot::{
     commands::{self, CommandContext},
     config::Config,
+    http::http_server,
 };
 use serenity::{
     Client,
@@ -58,6 +59,8 @@ impl EventHandler for Handler {
 #[tokio::main]
 async fn main() {
     let config = Config::init();
+
+    tokio::spawn(http_server());
 
     let mut client = Client::builder(config.clone().discord_token, GatewayIntents::empty())
         .event_handler(Handler { config })
