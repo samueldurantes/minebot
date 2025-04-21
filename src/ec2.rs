@@ -49,6 +49,8 @@ impl Ec2Manager {
 
         let client = Client::new(&config);
 
+        dbg!(&config);
+
         Ok(Self {
             client,
             instance_id,
