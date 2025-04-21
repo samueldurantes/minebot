@@ -1,5 +1,5 @@
 FROM scratch
 
-COPY target/release/minebot /
+COPY minebot /minebot
 
 ENTRYPOINT ["/minebot"]
