@@ -21,6 +21,7 @@ impl fmt::Display for Ec2Error {
     }
 }
 
+#[derive(Clone)]
 pub struct Ec2Manager {
     client: Client,
     instance_id: String,
@@ -29,6 +30,7 @@ pub struct Ec2Manager {
 impl Ec2Manager {
     pub async fn new(instance_id: String) -> Result<Self, Ec2Error> {
         let config = aws_config::load_from_env().await;
+        dbg!(&config);
         let client = Client::new(&config);
 
         Ok(Self {

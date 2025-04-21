@@ -1,6 +1,7 @@
 use minebot::{
     commands::{self, CommandContext},
     config::Config,
+    ec2::Ec2Manager,
     http::http_server,
 };
 use serenity::{
@@ -14,6 +15,20 @@ use serenity::{
 
 struct Handler {
     pub config: Config,
+    pub ec2_manager: Ec2Manager,
+}
+
+impl Handler {
+    pub async fn new(config: Config) -> Self {
+        let ec2_manager = Ec2Manager::new(config.ec2_instance_id.clone())
+            .await
+            .expect("Failed to create EC2 manager");
+        
+        Self {
+            config,
+            ec2_manager,
+        }
+    }
 }
 
 #[async_trait]
@@ -22,6 +37,7 @@ impl EventHandler for Handler {
         let command_ctx = CommandContext {
             default_ctx: ctx.clone(),
             config: self.config.clone(),
+            ec2_manager: self.ec2_manager.clone(),
         };
 
         if let Interaction::Command(command) = interaction {
@@ -62,8 +78,10 @@ async fn main() {
 
     tokio::spawn(http_server());
 
-    let mut client = Client::builder(config.clone().discord_token, GatewayIntents::empty())
-        .event_handler(Handler { config })
+    let handler = Handler::new(config.clone()).await;
+    
+    let mut client = Client::builder(config.discord_token, GatewayIntents::empty())
+        .event_handler(handler)
         .await
         .expect("Error when trying to create the client");
 
