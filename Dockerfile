@@ -1,5 +1,6 @@
 FROM scratch
 
 COPY ./target/release/minebot /minebot
+RUN chmod +x /minebot
 
-CMD ["ls", "-la", "./minebot"]
+CMD ["/minebot"]
