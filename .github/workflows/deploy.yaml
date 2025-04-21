@@ -34,7 +34,7 @@ jobs:
       - name: Build Rust application
         run: |
           cargo build --release
-          ls -la target/
+          ls -la target/release/
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3

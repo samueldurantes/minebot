@@ -1,5 +1,5 @@
 FROM scratch
 
-COPY ./target/x86_64-unknown-linux-gnu/release/minebot /minebot
+COPY ./target/release/minebot /minebot
 
-CMD ["/minebot"]
+CMD ["./minebot"]
