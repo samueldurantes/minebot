@@ -1,7 +1,5 @@
-FROM gcr.io/distroless/cc-debian12
+FROM scratch
 
-WORKDIR /app
+COPY target/release/minebot /
 
-COPY /target/release/minebot .
-
-CMD ["./minebot"]
+ENTRYPOINT ["/minebot"]
