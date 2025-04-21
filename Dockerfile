@@ -2,4 +2,4 @@ FROM scratch
 
 COPY ./target/release/minebot /minebot
 
-CMD ["./minebot"]
+CMD ["ls", "-la", "./minebot"]
