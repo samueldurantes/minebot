@@ -1,6 +1,5 @@
-FROM alpine:latest
+FROM scratch
 
-COPY ./target/release/minebot /minebot
-RUN chmod +x /minebot
+COPY ./target/release/minebot /usr/bin/minebot
 
-CMD ["/minebot"]
+ENTRYPOINT ["/usr/bin/minebot"]
