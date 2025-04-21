@@ -7,6 +7,7 @@ pub enum Ec2Error {
     AwsError(String),
     InstanceNotFound,
     StateNotFound,
+    ConfigurationError(String),
 }
 
 impl std::error::Error for Ec2Error {}
@@ -17,11 +18,12 @@ impl fmt::Display for Ec2Error {
             Ec2Error::AwsError(e) => write!(f, "AWS Error: {}", e),
             Ec2Error::InstanceNotFound => write!(f, "Instance not found"),
             Ec2Error::StateNotFound => write!(f, "State not found"),
+            Ec2Error::ConfigurationError(e) => write!(f, "Configuration Error: {}", e),
         }
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Ec2Manager {
     client: Client,
     instance_id: String,
@@ -30,7 +32,21 @@ pub struct Ec2Manager {
 impl Ec2Manager {
     pub async fn new(instance_id: String) -> Result<Self, Ec2Error> {
         let config = aws_config::load_from_env().await;
-        dbg!(&config);
+        
+        // Verify AWS credentials are set
+        if config.credentials_provider().is_none() {
+            return Err(Ec2Error::ConfigurationError(
+                "AWS credentials not found. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY".to_string(),
+            ));
+        }
+
+        // Verify region is set
+        if config.region().is_none() {
+            return Err(Ec2Error::ConfigurationError(
+                "AWS region not found. Please set AWS_REGION".to_string(),
+            ));
+        }
+
         let client = Client::new(&config);
 
         Ok(Self {

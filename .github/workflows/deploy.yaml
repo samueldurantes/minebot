@@ -35,7 +35,6 @@ jobs:
       - name: Cache Rust dependencies
         uses: Swatinem/rust-cache@v2
         with:
-          target-dir: target
           cache-targets: 'x86_64-unknown-linux-musl'
 
       - name: Build Rust application
