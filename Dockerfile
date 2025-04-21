@@ -1,8 +1,5 @@
 FROM scratch
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-COPY ./target/release/minebot /usr/src/app/minebot
+COPY ./target/release/minebot /minebot
 
 CMD ["/minebot"]
