@@ -1,6 +1,5 @@
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
-COPY ./target/release/minebot /usr/bin/minebot
-RUN ls -la /usr/bin/minebot
+COPY ./target/x86_64-unknown-linux-musl/release/minebot /usr/bin/minebot
 
 ENTRYPOINT ["/usr/bin/minebot"]

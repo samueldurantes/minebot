@@ -31,9 +31,12 @@ jobs:
       - name: Cache Rust dependencies
         uses: Swatinem/rust-cache@v2
 
+      - name: Add MUSL target
+        run: rustup target add x86_64-unknown-linux-musl
+
       - name: Build Rust application
         run: |
-          cargo build --release
+          cargo build --release --target x86_64-unknown-linux-musl
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3
