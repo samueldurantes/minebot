@@ -10,14 +10,16 @@ pub struct Config {
 
 impl Config {
     pub fn init() -> Self {
-        dotenvy::from_path(".env").expect(".env file not found");
+        // Only load .env file in development
+        if cfg!(debug_assertions) {
+            dotenvy::from_path(".env").ok();
+        }
 
         Self {
-            discord_token: var("DISCORD_TOKEN").expect("DISCORD_TOKEN is empty"),
-            ec2_instance_id: var("EC2_INSTANCE_ID").expect("EC2_INSTANCE_ID is empty"),
-            minecraft_server_ip: var("MINECRAFT_SERVER_IP").expect("MINECRAFT_SERVER_IP is empty"),
-            minecraft_server_port: var("MINECRAFT_SERVER_PORT")
-                .expect("MINECRAFT_SERVER_PORT is empty"),
+            discord_token: var("DISCORD_TOKEN").expect("DISCORD_TOKEN must be set"),
+            ec2_instance_id: var("EC2_INSTANCE_ID").expect("EC2_INSTANCE_ID must be set"),
+            minecraft_server_ip: var("MINECRAFT_SERVER_IP").expect("MINECRAFT_SERVER_IP must be set"),
+            minecraft_server_port: var("MINECRAFT_SERVER_PORT").expect("MINECRAFT_SERVER_PORT must be set"),
         }
     }
 }
