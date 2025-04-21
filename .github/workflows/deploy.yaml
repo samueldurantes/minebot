@@ -33,7 +33,8 @@ jobs:
 
       - name: Build Rust application
         run: |
-          cargo build -p minebot --release --locked
+          cargo build --release
+          strip target/release/minebot
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3
