@@ -22,9 +22,7 @@ async fn start_server(ec2_manager: &Ec2Manager) -> CreateEmbed {
     match ec2_manager.start_instance().await {
         Ok(_) => CreateEmbed::new()
             .title("✅ Instance server started")
-            .description(
-                "The instance is starting. It may take a few minutes to become available.",
-            )
+            .description("The instance is starting. It may take a few minutes to become available.")
             .color(colour::Colour::from_rgb(0, 255, 100)),
         Err(e) => embed_error(format!("Error starting server: {}", e)),
     }

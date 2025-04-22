@@ -23,7 +23,7 @@ impl Handler {
         let ec2_manager = Ec2Manager::new(config.ec2_instance_id.clone())
             .await
             .expect("Failed to create EC2 manager");
-        
+
         Self {
             config,
             ec2_manager,
@@ -79,7 +79,7 @@ async fn main() {
     tokio::spawn(http_server());
 
     let handler = Handler::new(config.clone()).await;
-    
+
     let mut client = Client::builder(config.discord_token, GatewayIntents::empty())
         .event_handler(handler)
         .await

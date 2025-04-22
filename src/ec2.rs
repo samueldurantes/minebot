@@ -1,5 +1,5 @@
-use aws_sdk_ec2::Client;
 use aws_sdk_ec2::types::InstanceStateName;
+use aws_sdk_ec2::{Client, config::Region};
 use std::fmt;
 
 #[derive(Debug)]
@@ -31,12 +31,16 @@ pub struct Ec2Manager {
 
 impl Ec2Manager {
     pub async fn new(instance_id: String) -> Result<Self, Ec2Error> {
-        let config = aws_config::load_from_env().await;
-        
+        let config = aws_config::from_env()
+            .region(Region::new("sa-east-1"))
+            .load()
+            .await;
+
         // Verify AWS credentials are set
         if config.credentials_provider().is_none() {
             return Err(Ec2Error::ConfigurationError(
-                "AWS credentials not found. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY".to_string(),
+                "AWS credentials not found. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY"
+                    .to_string(),
             ));
         }
 
@@ -48,8 +52,6 @@ impl Ec2Manager {
         }
 
         let client = Client::new(&config);
-
-        dbg!(&config);
 
         Ok(Self {
             client,

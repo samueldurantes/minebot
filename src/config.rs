@@ -20,12 +20,15 @@ impl Config {
 
         Self {
             aws_access_key_id: var("AWS_ACCESS_KEY_ID").expect("AWS_ACCESS_KEY_ID must be set"),
-            aws_secret_access_key: var("AWS_SECRET_ACCESS_KEY").expect("AWS_SECRET_ACCESS_KEY must be set"),
+            aws_secret_access_key: var("AWS_SECRET_ACCESS_KEY")
+                .expect("AWS_SECRET_ACCESS_KEY must be set"),
             aws_region: var("AWS_REGION").expect("AWS_REGION must be set"),
             discord_token: var("DISCORD_TOKEN").expect("DISCORD_TOKEN must be set"),
             ec2_instance_id: var("EC2_INSTANCE_ID").expect("EC2_INSTANCE_ID must be set"),
-            minecraft_server_ip: var("MINECRAFT_SERVER_IP").expect("MINECRAFT_SERVER_IP must be set"),
-            minecraft_server_port: var("MINECRAFT_SERVER_PORT").expect("MINECRAFT_SERVER_PORT must be set"),
+            minecraft_server_ip: var("MINECRAFT_SERVER_IP")
+                .expect("MINECRAFT_SERVER_IP must be set"),
+            minecraft_server_port: var("MINECRAFT_SERVER_PORT")
+                .expect("MINECRAFT_SERVER_PORT must be set"),
         }
     }
 }
