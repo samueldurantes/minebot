@@ -13,10 +13,7 @@ pub struct Config {
 
 impl Config {
     pub fn init() -> Self {
-        // Only load .env file in development
-        if cfg!(debug_assertions) {
-            dotenvy::from_path(".env").ok();
-        }
+        dotenvy::from_path(".env").expect(".env file not found");
 
         Self {
             aws_access_key_id: var("AWS_ACCESS_KEY_ID").expect("AWS_ACCESS_KEY_ID must be set"),
