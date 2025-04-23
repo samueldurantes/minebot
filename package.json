@@ -1,0 +1,21 @@
+{
+  "name": "minecraft-server-discord-bot",
+  "version": "1.0.0",
+  "description": "A Discord bot that controls a Minecraft server hosted on AWS EC2.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "@discordjs/builders": "^1.7.0",
+    "aws-sdk": "^2.1564.0",
+    "cron": "^4.1.4",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
