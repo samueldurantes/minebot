@@ -39,6 +39,14 @@ jobs:
 
       - name: Build Rust application
         run: |
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> .env
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> .env
+          echo "AWS_REGION=${{ secrets.AWS_REGION }}" >> .env
+          echo "DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }}" >> .env
+          echo "EC2_INSTANCE_ID=${{ secrets.EC2_INSTANCE_ID }}" >> .env
+          echo "MINECRAFT_SERVER_IP=${{ secrets.MINECRAFT_SERVER_IP }}" >> .env
+          echo "MINECRAFT_SERVER_PORT=${{ secrets.MINECRAFT_SERVER_PORT }}" >> .env
+
           cargo build --release --target x86_64-unknown-linux-musl
           strip target/x86_64-unknown-linux-musl/release/minebot
 
